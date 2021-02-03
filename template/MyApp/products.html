@@ -1,0 +1,70 @@
+{% include 'MyApp/base.html' %}
+{% block body_block %}
+<br><br>
+<div class="container">
+            <h1>{{ shop }}</h1>
+{{ message }}
+        {% for product in products %}
+    <div class="shadow p-4 mb-4 bg-white">
+        <div class="row">
+            <div class="col-sm-1">
+                <img src="{{ product.Productimage }}" width="80" height="80" class="rounded-circle">
+            </div>
+            <div class="col-sm-4">
+                <h4>{{ product.Productname }}</h4>
+            </div>
+            <div class="col-sm-7">
+                <div class="float-right">
+                     {% if request.session.type == 'useremail' %}
+                    <form method="post" action="/add_to_cart/">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="submit" name="add_to_cart" value="Add To Cart" class="btn btn-info">
+                    </form>
+                    {% else %}
+               <a  href="/applicant/"  class="btn btn-info">Go Login To Add To Cart</a>
+          {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+</div>
+
+
+
+{% endblock %}
+<div class="mt-5 pt-5 pb-5 footer">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5 col-xs-12 about-company">
+      <h2>Our AB_SoftMART</h2>
+      <p class="pr-5 text-white-50">Your online AB_SoftMART store includes a built-in commerce shopping cart.
+          Your customers can browse and buy from your store using Grocerries,EleCtric ITems or much many You Want to Buy..</p>
+      <p><a href="https://www.facebook.com/profile.php?id=100008458966684"><i class="fa fa-facebook-square mr-1"></i></a>
+          <a href="https://www.instagram.com/urs_truly_bahubali/"><i class="fa fa-linkedin-square"></i></a></p>
+    </div>
+    <div class="col-lg-3 col-xs-12 links">
+      <h4 class="mt-lg-0 mt-sm-3">EXPLORE</h4>
+        <ul class="m-0 p-0">
+          <li>- <a href="/home/">Home</a></li>
+          <li>- <a href="/shop/">Shop</a></li>
+<!--            <li>- <a href="showproduct">Shop Items</a></li>-->
+          <li>- <a href="/register/">Registration</a></li>
+          <li>- <a href="/applicant/">Login</a></li>
+        </ul>
+    </div>
+    <div class="col-lg-4 col-xs-12 location">
+      <h4 class="mt-lg-0 mt-sm-4">Location</h4>
+      <p> CL-16,Subhash nagar, Housing board colony, Maharajpur, Jabalpur,MP(482004)</p>
+      <p class="mb-0"><i class="fa fa-phone mr-3"></i>9752658795</p>
+      <p><i class="fa fa-envelope-o mr-3"></i>ay06291@gmail.com</p>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col copyright">
+      <p class=""><small class="text-white-50">© 2021. All Rights Reserved.</small></p>
+    </div>
+  </div>
+</div>
+</div>
